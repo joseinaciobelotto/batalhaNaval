@@ -270,19 +270,19 @@ public class Main {
                         posicionamentoTeste = 1;
                     }
                 }
-                    tamanhoReturnHere =	tamanho(matrixMap,tamanhoEsc,  cabecaX,  cabecaY, direcao, varGi,  posicionamentoTeste);
-                    varBarco[auxBarco]+= tamanhoReturnHere[0];
-                    posicionamentoTeste = tamanhoReturnHere[1];
-                    System.out.println("Digite o próximo barco!");
-                }
-                if(posicionamentoTeste == 0)
-                {
-                    percorrerMatriz(matrixMap, tamanhoEsc, cabecaX, cabecaY, direcao);
-                    printar(matrixMap);
-                }
+                tamanhoReturnHere =	tamanho(matrixMap,tamanhoEsc,  cabecaX,  cabecaY, direcao, varGi,  posicionamentoTeste);
+                varBarco[auxBarco]+= tamanhoReturnHere[0];
+                posicionamentoTeste = tamanhoReturnHere[1];
+                System.out.println("Digite o próximo barco!");
             }
-            return matrixMap;
+            if(posicionamentoTeste == 0)
+            {
+                percorrerMatriz(matrixMap, tamanhoEsc, cabecaX, cabecaY, direcao);
+                printar(matrixMap);
+            }
         }
+        return matrixMap;
+    }
     static String[][] positAleatoria(String[][]matrixMapHere)
     {
 
@@ -323,13 +323,13 @@ public class Main {
 
                     varTipo =  'A';
                     tamanhoEsc = 4;
-                    if (rand.nextInt(0,1) == 1) {
+                    if (rand.nextInt(0,2) == 1) {
                         vOh = 'V';
                     } else {
                         vOh = 'H';
                     }
-                    x = rand.nextInt(0,9);
-                    y = rand.nextInt(0,9);
+                    x = rand.nextInt(0,10);
+                    y = rand.nextInt(0,10);
                     tamanhoReturnHere =  tamanho(matrixMapHere,  tamanhoEsc, x, y, vOh, varTipo, 0);
                     testePosit = tamanhoReturnHere[1];
                     if( testePosit==3 ){
@@ -343,13 +343,13 @@ public class Main {
                 case 1:
                     varTipo =  'B';
                     tamanhoEsc = 3;
-                    if (rand.nextInt(0,1) == 1) {
+                    if (rand.nextInt(0,2) == 1) {
                         vOh = 'V';
                     } else {
                         vOh = 'H';
                     }
-                    x = rand.nextInt(0,9);
-                    y = rand.nextInt(0,9);
+                    x = rand.nextInt(0,10);
+                    y = rand.nextInt(0,10);
                     tamanhoReturnHere = tamanho(matrixMapHere,  tamanhoEsc, x, y, vOh, varTipo, 0);
                     testePosit = tamanhoReturnHere[1];
                     if(testePosit==3){
@@ -364,13 +364,13 @@ public class Main {
                 case 2:
                     varTipo =  'C';
                     tamanhoEsc = 2;
-                    if (rand.nextInt(0,1) == 1) {
+                    if (rand.nextInt(0,2) == 1) {
                         vOh = 'V';
                     } else {
                         vOh = 'H';
                     }
-                    x = rand.nextInt(0,9);
-                    y = rand.nextInt(0,9);
+                    x = rand.nextInt(0,10);
+                    y = rand.nextInt(0,10);
                     tamanhoReturnHere =   tamanho(matrixMapHere,  tamanhoEsc, x, y, vOh, varTipo, 0);
                     testePosit = tamanhoReturnHere[1];
                     if(testePosit==3){
@@ -384,13 +384,13 @@ public class Main {
                 case 3:
                     varTipo =  'D';
                     tamanhoEsc = 1;
-                    if (rand.nextInt(0,1) == 1) {
+                    if (rand.nextInt(0,2) == 1) {
                         vOh = 'V';
                     } else {
                         vOh = 'H';
                     }
-                    x = rand.nextInt(0,9);
-                    y = rand.nextInt(0,9);
+                    x = rand.nextInt(0,10);
+                    y = rand.nextInt(0,10);
                     tamanhoReturnHere =    tamanho(matrixMapHere,  tamanhoEsc, x, y, vOh, varTipo, 0);
                     testePosit = tamanhoReturnHere[1];
                     if(testePosit==3){
@@ -416,9 +416,9 @@ public class Main {
     static int modo(){
         int num = 1;
         do{
-        System.out.println("SELECIONE O MODO DE JOGO:");
-        System.out.println("1 - JOGADOR vs JOGADOR");
-        System.out.println("2 - JOGADOR VS COMPUTADOR");
+            System.out.println("SELECIONE O MODO DE JOGO:");
+            System.out.println("1 - JOGADOR vs JOGADOR");
+            System.out.println("2 - JOGADOR VS COMPUTADOR");
             num = (int) ler.next().toUpperCase().charAt(0);
             num = num - 48;
         } while(num < 1 || num > 2);
@@ -444,12 +444,13 @@ public class Main {
         percorrerMatriz(matrixMapUm, 10, 10, 10, 'a');
         int num = 1;
         do{
-        System.out.println("1 - ESCOLHER MANUALMENTE");
-        System.out.println("2 - ESCOLHER AUTOMATICAMENTE");
+            System.out.println("1 - ESCOLHER MANUALMENTE");
+            System.out.println("2 - ESCOLHER AUTOMATICAMENTE");
             num = (int) ler.next().toUpperCase().charAt(0);
             num = num - 48;
         } while(num < 1 || num > 2);
         if(num == 1){
+            printar(matrixMapUm);
             matrixMapUm = pedir(matrixMapUm);
         }
         else{
@@ -474,6 +475,7 @@ public class Main {
             sel = sel - 48;
         }
         if(sel == 1){
+            printar(matrixMapDois);
             matrixMapDois = pedir(matrixMapDois);
         }
         else{
@@ -487,6 +489,7 @@ public class Main {
     }
 
     //-----------------------ATAQUE--------------------------------------//
+
 
     static int ataque(String[][] matrixMap, int jogador, int contBar){
         int cabecaX = 9;
@@ -714,20 +717,20 @@ public class Main {
 
                         if (consecutivo==0)
                         {
-                        if (testeAcertoAgora==0 && auxGlobalTeste ==1)
-                        {
-
-
-                            if(xGlobal!= 9)
+                            if (testeAcertoAgora==0 && auxGlobalTeste ==1)
                             {
-                                xGlobal++;
-                                testeBotAcerto = 2;
-                                direcaoAcerto = +1;
 
+
+                                if(xGlobal!= 9)
+                                {
+                                    xGlobal++;
+                                    testeBotAcerto = 2;
+                                    direcaoAcerto = +1;
+
+                                }
+                                auxGlobalTeste = 2;
+                                testeBotAcerto=2;
                             }
-                            auxGlobalTeste = 2;
-                            testeBotAcerto=2;
-                        }
                         }
                         else
                         {
@@ -772,23 +775,23 @@ public class Main {
                     case 4:
 
                         if (consecutivo==0) {
-                        if (testeAcertoAgora ==0 && auxGlobalTeste==3)
-                        {
+                            if (testeAcertoAgora ==0 && auxGlobalTeste==3)
+                            {
 
-                            if (yGlobal != 0)
-                            {
-                                yGlobal++;
+                                if (yGlobal != 0)
+                                {
+                                    yGlobal++;
+                                }
+                                if (yGlobal != 9)
+                                {
+                                    testeBotAcerto = 2;
+                                    direcaoAcerto = +1;
+                                }else{
+                                    yGlobal--;
+                                }
                             }
-                            if (yGlobal != 9)
-                            {
-                                testeBotAcerto = 2;
-                                direcaoAcerto = +1;
-                            }else{
-                                yGlobal--;
-                            }
-                        }
                             testeBotAcerto=2;
-                        auxGlobalTeste = 4;
+                            auxGlobalTeste = 4;
                         }
                         else
                         {
@@ -814,28 +817,28 @@ public class Main {
 
                     while(nullnum == false)
                     {
-                    for (e = 0; e < todasPosicoes.length; e++)
-                    {
-                        if (todasPosicoes[e] != null)
+                        for (e = 0; e < todasPosicoes.length; e++)
                         {
+                            if (todasPosicoes[e] != null)
+                            {
 
-                            if (todasPosicoes[e].equals(String.valueOf(tentiva)) )
-                             {
-
-
-                              auxTesteTentativa++;
-
-                             }
+                                if (todasPosicoes[e].equals(String.valueOf(tentiva)) )
+                                {
 
 
+                                    auxTesteTentativa++;
 
+                                }
+
+
+
+                            }
+                            else {
+
+                                nullnum =true;
+
+                            }
                         }
-                        else {
-
-                            nullnum =true;
-
-                        }
-                    }
                     }
 
                     if (tentiva >= 0 && tentiva <= 9 && 0 == auxTesteTentativa)
