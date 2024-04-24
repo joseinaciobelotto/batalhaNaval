@@ -1,24 +1,15 @@
 import java.util.Random;
 import java.util.Scanner;
-
-
 public class Main {
-
     static Scanner ler = new Scanner(System.in);
     static Random rand = new Random();
-
-    //---------------------IMPRESSÃƒO-------------------//
-
+    //---------------------------------------------------IMPRESSÃO-----------------------------------------------------------------------------//
     static String[][] matrixMapUm = new String[10][10];
     static String[][] matrixMapDois = new String[10][10];
-
     static String[][] getMatrixMapUmAtacada = new String[10][10];
     static String[][] getMatrixMapDoisAtacada = new String[10][10];
-
     //static = NORMAL;
-
     public static String[][] iniciar(String[][] matrixMap){
-
         for (int aux1=0; aux1<matrixMap.length; aux1++)
         {
             for (int aux2=0; aux2<matrixMap[0].length; aux2++)
@@ -28,7 +19,6 @@ public class Main {
         }
         return matrixMap;
     }
-
     static void printar(String[][] matrixMap){
         char alfabeto = 65;
         System.out.println("   || 0 |  1 |  2 |  3 |  4  |  5  |  6 | 7  |  8 |  9 ||");
@@ -42,11 +32,9 @@ public class Main {
             alfabeto++;
         }
     }
-
     static String[][] percorrerMatriz( String[][]matrixMap,int tamanhoEscHere,int cabecaXHere, int cabecaYHere, char direcaoHere)
     {
         int aux1, aux2,aux3 = 0;
-
         for (aux1=0; aux1<matrixMap.length; aux1++)
         {
             for (aux2=0; aux2<matrixMap[0].length; aux2++)
@@ -66,7 +54,6 @@ public class Main {
                                 matrixMap[aux1][contP] = "⚓";
                             }
                         }
-
                     }
                     else if(tamanhoEscHere == 3){
                         if(direcaoHere == 'V'){
@@ -95,20 +82,13 @@ public class Main {
                     }
                 }
             }
-
         }
         return matrixMap;
     }
-
-
-    //---------------------POSICIONAMENTO-------------------//
-
+    //--------------------------------------------------------POSICIONAMENTO---------------------------------------------------------//
     static int testeDePercorrimento(String[][] matrixMap, int tamanhoEscHere, int cabecaXHere, int cabecaYHere, char direcaoHere)
     {
-
-        int aux=0;
-        int linhaColuna = 0;
-        int barcos = 0;
+        int aux=0, linhaColuna = 0, barcos = 0;
         switch (direcaoHere)
         {
             case 'H':
@@ -134,7 +114,6 @@ public class Main {
         }
         return barcos;
     };
-
     static int[] tamanho( String[][] matrixMap, int tamanhoEsc, int cabecaX, int cabecaY, char direcao, int varTipo, int posicionamentoTeste)
     {
         int somaDirecao =0;
@@ -148,15 +127,11 @@ public class Main {
                 somaDirecao = cabecaY + tamanhoEsc;
                 break;
         }
-
         if (varTipo != 0) {
-
-
             if (somaDirecao <= 10)
             {
                 tamanhoReturn[0] = -1;
                 tamanhoReturn[1] = 0;
-
                 if (0 != testeDePercorrimento(matrixMap, tamanhoEsc, cabecaX, cabecaY, direcao))
                 {
                     System.out.println("Já tem um barco ai!");
@@ -174,53 +149,39 @@ public class Main {
             System.out.println("Número de barcos esgotado!");
             tamanhoReturn[1]=3;
         }
-
         return tamanhoReturn;
     }
-
-
     static String[][] pedir(String[][] matrixMap)
     {
         Scanner ler = new Scanner(System.in);
         char tipo, direcao = 0;
-        int varGi = 1, varGr = 2, varMe = 3, varPe =4, posicionamentoTeste = 3, cabecaX = 1, cabecaY = 1;
-        int tamanhoEsc = 0;
+        int varGi = 1, varGr = 2, varMe = 3, varPe =4, posicionamentoTeste = 3, cabecaX = 1, cabecaY = 1, tamanhoEsc = 0;
         int[] varBarco = new int[4];
-
         varBarco[0] = varGi;
         varBarco[1] = varGr;
         varBarco[2] = varMe;
         varBarco[3] = varPe;
-
         while (varBarco[0] != 0 || varBarco[1] != 0 || varBarco[2] != 0 || varBarco[3] != 0 || posicionamentoTeste != 0)
         {
             posicionamentoTeste = 3;
-
-
             while (posicionamentoTeste == 3)
             {
                 System.out.println("Qual a linha do primeiro quadrado do barco?");
                 cabecaX = (int) ler.next().toUpperCase().charAt(0);
                 cabecaX = cabecaX - 65;
-
                 if (cabecaX >= 0 && cabecaX <= 9) {
                     System.out.println("Qual a coluna do primeiro quadrado do barco?");
                     cabecaY = (int) ler.next().toUpperCase().charAt(0);
                     cabecaY = cabecaY - 48;
-
-
                     if (cabecaY >= 0 && cabecaY <= 9) {
                         posicionamentoTeste--;
                     } else {
                         System.out.println("Posição inválida! Digite novamente!");
                     }
-
                 } else {
                     System.out.println("Posição inválida! Digite novamente!");
                 }
-
                 ler.nextLine();
-
             }
             while (posicionamentoTeste == 2)
             {
@@ -241,7 +202,6 @@ public class Main {
             while (posicionamentoTeste == 1)
             {
                 int[] tamanhoReturnHere = new int[7];
-
                 int auxBarco = 0;
                 System.out.println("Qual barco você deseja selecionar?");
                 System.out.println("A - Barco Gigante(4)  Você possui" + "[" + varBarco[0] + "]" + "deste tipo sobrando");
@@ -270,7 +230,7 @@ public class Main {
                         posicionamentoTeste = 1;
                     }
                 }
-                tamanhoReturnHere =	tamanho(matrixMap,tamanhoEsc,  cabecaX,  cabecaY, direcao, varGi,  posicionamentoTeste);
+                tamanhoReturnHere = tamanho(matrixMap,tamanhoEsc,  cabecaX,  cabecaY, direcao, varBarco[auxBarco],  posicionamentoTeste);
                 varBarco[auxBarco]+= tamanhoReturnHere[0];
                 posicionamentoTeste = tamanhoReturnHere[1];
                 System.out.println("Digite o próximo barco!");
@@ -285,42 +245,23 @@ public class Main {
     }
     static String[][] positAleatoria(String[][]matrixMapHere)
     {
-
-        int varGi = 1;
-        int varGr = 2;
-        int varMe = 3;
-        int varPe = 4;
-        int testePosit = 0;
-        int testePosita = 20;
-        int tamanhoEsc = 0;
-        int aux2 = 0;
-        char varTipo = '0';
+        int varGi = 1, varGr = 2, varMe = 3, varPe = 4, testePosit = 0, testePosita = 20, tamanhoEsc = 0, aux2 = 0, x =0, y =0, randHere=0,  auxTipo =0;
+        char varTipo = '0', vOh = 'a';
         int[] tamanhoReturnHere = new int[7];
         int[] varTipos = new int[4];
-        char vOh = 'a';
-        int x =0;
-        int y =0;
-        int randHere=0;
-
-        int auxTipo =0;
-
         varTipos[0]=varGi;
         varTipos[1]=varGr;
         varTipos[2]=varMe;
         varTipos[3]=varPe;
-
         for( aux2=10; aux2> 0; )
         {
-
             if(varTipos[auxTipo]<=0 && auxTipo<=3)
             {
                 auxTipo++;
             }
             switch (auxTipo)
             {
-
                 case 0:
-
                     varTipo =  'A';
                     tamanhoEsc = 4;
                     if (rand.nextInt(0,2) == 1) {
@@ -353,7 +294,6 @@ public class Main {
                     tamanhoReturnHere = tamanho(matrixMapHere,  tamanhoEsc, x, y, vOh, varTipo, 0);
                     testePosit = tamanhoReturnHere[1];
                     if(testePosit==3){
-
                     }else{
                         aux2-=1;
                         varGr--;
@@ -395,7 +335,6 @@ public class Main {
                     testePosit = tamanhoReturnHere[1];
                     if(testePosit==3){
                     }else{
-
                         varPe--;
                         varTipos[3]-=1;
                         aux2-=1;
@@ -404,15 +343,13 @@ public class Main {
                     break;
             }
         }
-
         return matrixMapHere;
     }
     static String[][] aleatorio(String[][] matrixMap){
         matrixMap = positAleatoria(matrixMap);
         return matrixMap;
     }
-
-    //---------------------INTRODUCAO-------------------//
+    //---------------------------------------------------------------INTRODUCAO--------------------------------------------------------------//
     static int modo(){
         int num = 1;
         do{
@@ -437,7 +374,6 @@ public class Main {
         }
         return matrixComputador;
     }
-
     static String[][] j1(){
         System.out.println("\nVEZ DO JOGADOR 1!");
         matrixMapUm = iniciar(matrixMapUm);
@@ -462,7 +398,6 @@ public class Main {
         }
         return matrixMapUm;
     }
-
     static String[][] j2(){
         System.out.println("\nVEZ DO JOGADOR 2!");
         matrixMapDois = iniciar(matrixMapDois);
@@ -487,10 +422,7 @@ public class Main {
         }
         return matrixMapDois;
     }
-
-    //-----------------------ATAQUE--------------------------------------//
-
-
+    //-----------------------------------------------------------------ATAQUE----------------------------------------------------------------------//
     static int ataque(String[][] matrixMap, int jogador, int contBar){
         int cabecaX = 9;
         int cabecaY = 9;
@@ -506,13 +438,11 @@ public class Main {
             System.out.println("\nESCOLHA UMA LINHA PARA ATACAR");
             cabecaX = (int) ler.next().toUpperCase().charAt(0);
             cabecaX = cabecaX - 65;
-
         }while(cabecaX <0 || cabecaX>9);
         do{
             System.out.println("\nESCOLHA UMA COLUNA PARA ATACAR");
             cabecaY = (int) ler.next().toUpperCase().charAt(0);
             cabecaY = cabecaY - 48;
-
         }while(cabecaY < 0 || cabecaY>9);
         contBar = atacando(matrixMap, 1, cabecaX, cabecaY, 'B', contBar, jogador);
         return contBar;
@@ -551,7 +481,6 @@ public class Main {
                     getMatrixMapUmAtacada[cabecaXHere][cabecaYHere] = "🎇";
                     printar(getMatrixMapUmAtacada);
                 }
-
             }
         }
         if (matrixMap[cabecaXHere][cabecaYHere] == "🎲" && direcaoHere == 'B' ){
@@ -562,41 +491,14 @@ public class Main {
         int descarte = ler.next().charAt(0);
         return contBar;
     }
-
-
-
-
-
-
-    static int testeBotAcerto = 0;
-    static int aON;
-
-    static int xGlobal =0;
-    static int yGlobal =0;
-    static int auxGlobal = 5;
-    static int contBarAnt = 20;
-
+    static int testeBotAcerto = 0, aON, xGlobal =0, yGlobal =0,auxGlobal = 5,contBarAnt = 20, testeAcertoAgora = 0,auxGlobalTeste = 1,consecutivo = 0,auxTodasPosicoes = 0,direcaoAcerto = -1;
     static boolean testeDentro = true;
-    static int testeAcertoAgora = 0;
-
-    static int auxGlobalTeste = 1;
-
-    static int consecutivo = 0;
-    static int direcaoAcerto = -1;
-
     static int[] consecutivdade = new int[2];
-
     static String[] todasPosicoes= new String[101];
-
-    static int auxTodasPosicoes = 0;
-
     static int[] testarRepetidas()
     {
-
         boolean testeString = false;
-
         int[] xEy = new int[2];
-
         while (testeString != true)
         {
             int auxTesteTodasPosicoes=0;
@@ -610,13 +512,11 @@ public class Main {
             xS = String.valueOf(xGlobal);
             yS = String.valueOf(yGlobal);
             junto = xS + yS;
-
             for (int e = 0; e < todasPosicoes.length && testeString != true; e++)
             {
                 if (todasPosicoes[e] != null)
                 {
                     if (todasPosicoes[e].equals(junto)) {
-
                         auxTesteTodasPosicoes++;
                     }
                 }
@@ -632,303 +532,183 @@ public class Main {
                 }
             }
         }
-
         return xEy;
     };
-
-
-
     static int ataqueBot(String[][] matrixMap, int jogador, int contBar)
     {
-        int tentiva = 0;
-        for (int e = 0; e <= todasPosicoes.length; e++) {
-
-
-            if( todasPosicoes[e] == null)
-            {
-                e=105;
+        do {
+            int tentiva = 0;
+            for (int e = 0; e <= todasPosicoes.length; e++) {
+                if (todasPosicoes[e] == null) {
+                    e = 105;
+                }
             }
-        }
-
-        if (contBarAnt > contBar)
-        {
-            consecutivdade[0]=consecutivdade[1];
-            consecutivdade[1]=contBar;
-
-            if(consecutivdade[0] == consecutivdade[1])
-            {
-                consecutivo=1;
-            }
-
-            testeDentro = false;
-            testeAcertoAgora=1;
-            testeBotAcerto=1;
-            auxGlobal = 1;
-        }
-        else
-        {
-            if (auxGlobal >= 5)
-            {
-
-                testeBotAcerto = 0;
-                int[] xEyHere = new int[2];
-                xEyHere = testarRepetidas();
-                xGlobal= xEyHere[0];
-                yGlobal=xEyHere[1];
-            }
-            else
-            {
-                consecutivo=0;
-                testeAcertoAgora=0;
+            if (contBarAnt > contBar) {
+                consecutivdade[0] = consecutivdade[1];
+                consecutivdade[1] = contBar;
+                if (consecutivdade[0] == consecutivdade[1]) {
+                    consecutivo = 1;
+                }
                 testeDentro = false;
-                testeBotAcerto =1;
-            }
-        }
-        while (!testeDentro)
-        {
-            if (testeBotAcerto == 1)
-            {
-                switch (auxGlobal)
-                {
-                    case 1:
-
-                        if (consecutivo==0)
-                        {
-                            if (testeAcertoAgora==1)
-                            {
-                                if(xGlobal!= 0)
-                                {
-                                    testeBotAcerto =2;
-                                    direcaoAcerto = -1;
-                                }
-
-                            }
-                            auxGlobalTeste =1;
-                            testeBotAcerto=2;
-                        }
-                        else {
-
-                            auxGlobal=5;
-                            testeBotAcerto=2;
-                        }
-
-                        break;
-                    case 2:
-
-                        if (consecutivo==0)
-                        {
-                            if (testeAcertoAgora==0 && auxGlobalTeste ==1)
-                            {
-
-
-                                if(xGlobal!= 9)
-                                {
-                                    xGlobal++;
-                                    testeBotAcerto = 2;
-                                    direcaoAcerto = +1;
-
-                                }
-                                auxGlobalTeste = 2;
-                                testeBotAcerto=2;
-                            }
-                        }
-                        else
-                        {
-
-                            auxGlobal=5;
-                            testeBotAcerto=2;
-                        }
-
-                        break;
-                    case 3:
-
-
-                        if (consecutivo==0)
-                        {
-                            if (testeAcertoAgora == 0)
-                            {
-
-                                if(xGlobal!= 0)
-                                {
-                                    xGlobal--;
-                                }
-
-                                if (yGlobal != 0) {
-
-
-                                    testeBotAcerto = 2;
-                                    direcaoAcerto = -1;
-
-                                }
-                            }
-                            auxGlobalTeste = 3;
-                            testeBotAcerto=2;
-                        }
-                        else
-                        {
-
-                            auxGlobal=5;
-                            testeBotAcerto=2;
-                        }
-
-                        break;
-                    case 4:
-
-                        if (consecutivo==0) {
-                            if (testeAcertoAgora ==0 && auxGlobalTeste==3)
-                            {
-
-                                if (yGlobal != 0)
-                                {
-                                    yGlobal++;
-                                }
-                                if (yGlobal != 9)
-                                {
-                                    testeBotAcerto = 2;
-                                    direcaoAcerto = +1;
-                                }else{
-                                    yGlobal--;
-                                }
-                            }
-                            testeBotAcerto=2;
-                            auxGlobalTeste = 4;
-                        }
-                        else
-                        {
-
-                            auxGlobal=5;
-                            testeBotAcerto=2;
-                        }
-
-                        break;
-                    default:testeBotAcerto=2;
+                testeAcertoAgora = 1;
+                testeBotAcerto = 1;
+                auxGlobal = 1;
+            } else {
+                if (auxGlobal >= 5) {
+                    testeBotAcerto = 0;
+                    int[] xEyHere = new int[2];
+                    xEyHere = testarRepetidas();
+                    xGlobal = xEyHere[0];
+                    yGlobal = xEyHere[1];
+                } else {
+                    consecutivo = 0;
+                    testeAcertoAgora = 0;
+                    testeDentro = false;
+                    testeBotAcerto = 1;
                 }
             }
-            if (testeBotAcerto == 2)
-            {
-
-                if (auxGlobalTeste >= 1 && auxGlobalTeste <= 2)
-                {
-                    int auxTesteTentativa =0;
-                    int e =0;
-                    boolean nullnum = false;
-                    xGlobal += direcaoAcerto;
-                    tentiva = xGlobal;
-
-                    while(nullnum == false)
-                    {
-                        for (e = 0; e < todasPosicoes.length; e++)
-                        {
-                            if (todasPosicoes[e] != null)
-                            {
-
-                                if (todasPosicoes[e].equals(String.valueOf(tentiva)) )
-                                {
-
-
-                                    auxTesteTentativa++;
-
+            while (!testeDentro) {
+                if (testeBotAcerto == 1) {
+                    switch (auxGlobal) {
+                        case 1:
+                            if (consecutivo == 0) {
+                                if (testeAcertoAgora == 1) {
+                                    if (xGlobal != 0) {
+                                        testeBotAcerto = 2;
+                                        direcaoAcerto = -1;
+                                    }
                                 }
-
-
-
+                                auxGlobalTeste = 1;
+                                testeBotAcerto = 2;
+                            } else {
+                                auxGlobal = 5;
+                                testeBotAcerto = 2;
                             }
-                            else {
-
-                                nullnum =true;
-
+                            break;
+                        case 2:
+                            if (consecutivo == 0) {
+                                if (testeAcertoAgora == 0 && auxGlobalTeste == 1) {
+                                    if (xGlobal != 9) {
+                                        xGlobal++;
+                                        testeBotAcerto = 2;
+                                        direcaoAcerto = +1;
+                                    }
+                                    auxGlobalTeste = 2;
+                                    testeBotAcerto = 2;
+                                }
+                            } else {
+                                auxGlobal = 5;
+                                testeBotAcerto = 2;
                             }
-                        }
-                    }
-
-                    if (tentiva >= 0 && tentiva <= 9 && 0 == auxTesteTentativa)
-                    {
-
-                        testeDentro = true;
-                        testeBotAcerto=1;
-                        auxGlobal++;
-                    }
-                    else
-                    {
-
-                        int[] xEyHere = new int[2];
-                        xEyHere = testarRepetidas();
-                        xGlobal= xEyHere[0];
-                        yGlobal=xEyHere[1];
+                            break;
+                        case 3:
+                            if (consecutivo == 0) {
+                                if (testeAcertoAgora == 0) {
+                                    if (xGlobal != 0) {
+                                        xGlobal--;
+                                    }
+                                    if (yGlobal != 0) {
+                                        testeBotAcerto = 2;
+                                        direcaoAcerto = -1;
+                                    }
+                                }
+                                auxGlobalTeste = 3;
+                                testeBotAcerto = 2;
+                            } else {
+                                auxGlobal = 5;
+                                testeBotAcerto = 2;
+                            }
+                            break;
+                        case 4:
+                            if (consecutivo == 0) {
+                                if (testeAcertoAgora == 0 && auxGlobalTeste == 3) {
+                                    if (yGlobal != 0) {
+                                        yGlobal++;
+                                    }
+                                    if (yGlobal != 9) {
+                                        testeBotAcerto = 2;
+                                        direcaoAcerto = +1;
+                                    } else {
+                                        yGlobal--;
+                                    }
+                                }
+                                testeBotAcerto = 2;
+                                auxGlobalTeste = 4;
+                            } else {
+                                auxGlobal = 5;
+                                testeBotAcerto = 2;
+                            }
+                            break;
+                        default:
+                            testeBotAcerto = 2;
                     }
                 }
-                else if (auxGlobalTeste >= 3 && auxGlobalTeste <= 4)
-                {
-                    int auxTesteTentativa =0;
-                    int e =0;
-                    boolean nullnum = false;
-                    yGlobal += direcaoAcerto;
-                    tentiva = yGlobal;
-
-
-                    while(nullnum == false)
-                    {
-                        for (e = 0; e < todasPosicoes.length; e++)
-                        {
-                            if (todasPosicoes[e] != null)
-                            {
-
-                                if (todasPosicoes[e].equals(String.valueOf(tentiva)) )
-                                {
-
-
-                                    auxTesteTentativa++;
-
+                if (testeBotAcerto == 2) {
+                    if (auxGlobalTeste >= 1 && auxGlobalTeste <= 2) {
+                        int auxTesteTentativa = 0;
+                        int e = 0;
+                        boolean nullnum = false;
+                        xGlobal += direcaoAcerto;
+                        tentiva = xGlobal;
+                        while (nullnum == false) {
+                            for (e = 0; e < todasPosicoes.length; e++) {
+                                if (todasPosicoes[e] != null) {
+                                    if (todasPosicoes[e].equals(String.valueOf(tentiva))) {
+                                        auxTesteTentativa++;
+                                    }
+                                } else {
+                                    nullnum = true;
                                 }
-
-
-
-                            }
-                            else {
-
-                                nullnum =true;
-
                             }
                         }
+                        if (tentiva >= 0 && tentiva <= 9 && 0 == auxTesteTentativa) {
+                            testeDentro = true;
+                            testeBotAcerto = 1;
+                            auxGlobal++;
+                        } else {
+                            int[] xEyHere = new int[2];
+                            xEyHere = testarRepetidas();
+                            xGlobal = xEyHere[0];
+                            yGlobal = xEyHere[1];
+                        }
+                    } else if (auxGlobalTeste >= 3 && auxGlobalTeste <= 4) {
+                        int auxTesteTentativa = 0;
+                        int e = 0;
+                        boolean nullnum = false;
+                        yGlobal += direcaoAcerto;
+                        tentiva = yGlobal;
+                        while (nullnum == false) {
+                            for (e = 0; e < todasPosicoes.length; e++) {
+                                if (todasPosicoes[e] != null) {
+                                    if (todasPosicoes[e].equals(String.valueOf(tentiva))) {
+                                        auxTesteTentativa++;
+                                    }
+                                } else {
+                                    nullnum = true;
+                                }
+                            }
+                        }
+                        if (tentiva >= 0 && tentiva <= 9 && 0 == auxTesteTentativa) {
+                            testeDentro = true;
+                            testeBotAcerto = 1;
+                            auxGlobal++;
+                        } else {
+                            int[] xEyHere = new int[2];
+                            xEyHere = testarRepetidas();
+                            xGlobal = xEyHere[0];
+                            yGlobal = xEyHere[1];
+                        }
+                    } else {
+                        auxGlobal = 5;
                     }
-
-
-
-
-
-                    if (tentiva >= 0 && tentiva <= 9 && 0 == auxTesteTentativa)
-                    {
-
-                        testeDentro = true;
-                        testeBotAcerto=1;
-                        auxGlobal++;
-                    }else
-                    {
-
-                        int[] xEyHere = new int[2];
-                        xEyHere = testarRepetidas();
-                        xGlobal= xEyHere[0];
-                        yGlobal=xEyHere[1];
-                    }
-                }
-                else
-                {
-                    auxGlobal = 5;
                 }
             }
-        }
-
-
-
-        contBarAnt=contBar;
-
+            contBarAnt=contBar;
+        }while(matrixMap[xGlobal][yGlobal] == "🎲");
         contBar = atacando(matrixMap, 9, xGlobal , yGlobal, 'B', contBar, jogador);
-
         return contBar;
     }
-
-    //------------------MAIN------------------//
-
+    //-------------------------------------------------------MAIN-------------------------------------------------------------//
     public static void main(String[] args)
     {
         iniciar(matrixMapDois);
